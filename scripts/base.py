@@ -521,20 +521,20 @@ def git_is_ssh():
   if (git_protocol == "ssh"):
     return True
   origin = git_get_origin()
-  if (git_protocol == "auto") and (origin.find(":ONLYOFFICE/") != -1):
+  if (git_protocol == "auto") and (origin.find(":ONLYOFFICE-UNLIMITED/") != -1):
     return True
   return False
 
 def get_ssh_base_url():
   cur_origin = git_get_origin()
-  ind = cur_origin.find(":ONLYOFFICE/")
+  ind = cur_origin.find(":ONLYOFFICE-UNLIMITED/")
   if (ind == -1):
-    return "git@github.com:ONLYOFFICE/"
+    return "git@github.com:ONLYOFFICE-UNLIMITED/"
   return cur_origin[:ind+12]
 
 def git_update(repo, is_no_errors=False, is_current_dir=False, git_owner=""):
   print("[git] update: " + repo)
-  owner = git_owner if git_owner else "ONLYOFFICE"
+  owner = git_owner if git_owner else "ONLYOFFICE-UNLIMITED"
   url = "https://github.com/" + owner + "/" + repo + ".git"
   if git_is_ssh():
     url = get_ssh_base_url() + repo + ".git"
@@ -607,7 +607,7 @@ def get_branding_repositories(checker):
 
 def create_pull_request(branches_to, repo, is_no_errors=False, is_current_dir=False):
   print("[git] create pull request: " + repo)
-  url = "https://github.com/ONLYOFFICE/" + repo + ".git"
+  url = "https://github.com/ONLYOFFICE-UNLIMITED/" + repo + ".git"
   if git_is_ssh():
     url = get_ssh_base_url() + repo + ".git"
   folder = get_script_dir() + "/../../" + repo
